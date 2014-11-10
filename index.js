@@ -36,7 +36,7 @@ module.exports = function (file) {
 					console.log(msg);
 				}
 			}
-			this.queue(data);
 		}.bind(this));
+		this.queue(data)
 	});
 };
