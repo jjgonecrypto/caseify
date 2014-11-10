@@ -34,7 +34,7 @@ eg. `package.json`
 ```json
  ...
  "devDependencies": {
-     "caseify": "0.1.x"
+     "caseify": "0.0.x"
  },
  "caseify": {
     "relativePaths": true,
