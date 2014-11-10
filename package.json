@@ -11,12 +11,24 @@
     "url": "https://github.com/justinjmoses/caseify"
   },
   "keywords": [
-    "browserify-transform"
+    "browserify-transform",
+    "browserify",
+    "case-sensitive",
+    "module not found"
   ],
   "author": "justin j. moses",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/justinjmoses/casify/issues"
   },
-  "homepage": "https://github.com/justinjmoses/casify"
+  "peerDependencies": {
+    "browserify": ">= 2.3.0 < 7"
+  },
+  "homepage": "https://github.com/justinjmoses/casify",
+  "dependencies": {
+    "colors": "1.0.x",
+    "detect-invalid-requires": "0.1.x",
+    "mothership": "0.3.x",
+    "through": "2.3.x"
+  }
 }
