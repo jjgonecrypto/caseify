@@ -1,5 +1,5 @@
 {
-  "name": "casify",
+  "name": "caseify",
   "version": "0.0.1",
   "description": "Browserify transform to ensure all dependencies exist in a case-sensitive environment",
   "main": "index.js",
