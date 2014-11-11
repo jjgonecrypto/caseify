@@ -10,18 +10,17 @@ require('colors');
 // Valid options (set in package.json under caseify)
 // * relativePaths: default FALSE
 // * throwOnError: default FALSE
-function loadOptionsFromPackage() {
-	var res = mothership.sync(
-		process.cwd(), function ismothership (pack) {
+function loadOptionsFromPackage(file) {
+	var res = mothership.sync(file, function ismothership (pack) {
 		return !!(pack.caseify);
-		}
-	);
+	});
 	return res && res.pack && res.pack.caseify ? res.pack.caseify : {};
 }
 
 module.exports = function (file) {
-	var options = loadOptionsFromPackage();
+	var options = loadOptionsFromPackage(file);
 	return through(function (data) {
+		this.pause();
 		detector(file, {}, function (invalids) {
 			var msg, fileRelOrAbs;
 			if (invalids.length) {
@@ -33,10 +32,11 @@ module.exports = function (file) {
 				if (options.throwOnError) {
 					throw new Error(msg);
 				} else {
-					console.log(msg);
+					console.error(msg);
 				}
 			}
+			this.resume();
 		}.bind(this));
-		this.queue(data)
+		this.queue(data);
 	});
 };

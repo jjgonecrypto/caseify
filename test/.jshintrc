@@ -1,0 +1,25 @@
+{
+    "node": true,
+
+    "indent": 4,
+
+    "sub": true,
+
+    "newcap": false,
+
+    "expr": true,
+
+    "quotmark": "single",
+
+    "unused": true,
+
+    "undef": true,
+
+    "strict": true,
+
+    "debug": true,
+
+    "newcap": true,
+
+    "predef": [ "describe", "it", "beforeEach", "afterEach", "xdescribe", "xit" ]
+}

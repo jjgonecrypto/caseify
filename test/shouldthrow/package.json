@@ -1,0 +1,7 @@
+{
+  "name": "someproject",
+  "version": "0.0.1",
+  "caseify": {
+      "throwOnError": true
+  }
+}

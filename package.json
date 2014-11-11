@@ -30,5 +30,11 @@
     "detect-invalid-requires": "0.1.x",
     "mothership": "0.3.x",
     "through": "2.3.x"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "proxyquire": "^1.0.1",
+    "sinon": "^1.11.1",
+    "sinon-chai": "^2.6.0"
   }
 }
