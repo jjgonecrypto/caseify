@@ -32,7 +32,7 @@ module.exports = function (file) {
 				if (options.throwOnError) {
 					throw new Error(msg);
 				} else {
-					console.error(msg);
+					this.emit('error', msg);
 				}
 			}
 			this.resume();

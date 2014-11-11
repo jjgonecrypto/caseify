@@ -9,20 +9,20 @@ var proxyquire =  require('proxyquire');
 
 
 describe('-- tests --', function () {
-    var consoleSpy, detectorStub, caseify;
+    var detectorStub, caseify, streamErrorSpy;
 
     beforeEach(function () {
-        consoleSpy = sinon.stub(console, 'error').returns(function () {}); //why can't we simply spy on console.error?
+        streamErrorSpy = sinon.spy();
         detectorStub = sinon.stub();
         caseify = proxyquire('../', { 'detect-invalid-requires': detectorStub });
     });
 
-    afterEach(function () {
-        consoleSpy.restore();
-    });
+    afterEach(function () { });
 
     function setupTest(name, returnFromDetector) {
-        caseify(path.join(__dirname, name, 'index.js')).write('');
+        var stream = caseify(path.join(__dirname, name, 'index.js'));
+        stream.write('');
+        stream.on('error', streamErrorSpy);
         detectorStub.callArgWith(2, returnFromDetector || []);
     }
 
@@ -34,17 +34,17 @@ describe('-- tests --', function () {
         describe('is Valid', function () {
             it('must not log any errors', function () {
                 setupTest('noconfig');
-                expect(consoleSpy).to.not.have.been.called;
+                expect(streamErrorSpy).to.not.have.been.called;
             });
         });
         describe('is Invalid', function () {
             it('must log any errors', function () {
                 setupTest('noconfig', generateInvalid());
-                expect(consoleSpy).to.have.been.called;
+                expect(streamErrorSpy).to.have.been.called;
             });
             it('must log out absolute paths', function () {
                 setupTest('noconfig', generateInvalid('/some/file/path'));
-                expect(consoleSpy).to.have.been.calledWithMatch('/some/file/path');
+                expect(streamErrorSpy).to.have.been.calledWithMatch('/some/file/path');
             });
         });
     });
@@ -53,17 +53,17 @@ describe('-- tests --', function () {
         describe('is Valid', function () {
             it('must not log any errors', function () {
                 setupTest('noconfig');
-                expect(consoleSpy).to.not.have.been.called;
+                expect(streamErrorSpy).to.not.have.been.called;
             });
         });
         describe('is Invalid', function () {
             it('must log any errors', function () {
                 setupTest('noconfig', generateInvalid());
-                expect(consoleSpy).to.have.been.called;
+                expect(streamErrorSpy).to.have.been.called;
             });
             it('must log out absolute paths', function () {
                 setupTest('noconfig', generateInvalid('/some/file/path'));
-                expect(consoleSpy).to.have.been.calledWithMatch('/some/file/path');
+                expect(streamErrorSpy).to.have.been.calledWithMatch('/some/file/path');
             });
         });
     });
@@ -72,7 +72,7 @@ describe('-- tests --', function () {
         describe('is Valid', function () {
             it('must not throw or log any errors', function () {
                 expect(function () { setupTest('shouldthrow'); }).to.not.throw(Error);
-                expect(consoleSpy).to.not.have.been.called;
+                expect(streamErrorSpy).to.not.have.been.called;
             });
         });
         describe('is Invalid', function () {
@@ -86,17 +86,17 @@ describe('-- tests --', function () {
         describe('is Valid', function () {
             it('must not log any errors', function () {
                 setupTest('relativepaths');
-                expect(consoleSpy).to.not.have.been.called;
+                expect(streamErrorSpy).to.not.have.been.called;
             });
         });
         describe('is Invalid', function () {
             it('must log any errors', function () {
                 setupTest('relativepaths', generateInvalid());
-                expect(consoleSpy).to.have.been.called;
+                expect(streamErrorSpy).to.have.been.called;
             });
             it('must log out relative paths', function () {
                 setupTest('noconfig', generateInvalid(path.join(__dirname, 'relativepaths', 'index.js')));
-                expect(consoleSpy).to.have.been.calledWithMatch(path.join('relativepaths', 'index.js'));
+                expect(streamErrorSpy).to.have.been.calledWithMatch(path.join('relativepaths', 'index.js'));
             });
         });
     });
