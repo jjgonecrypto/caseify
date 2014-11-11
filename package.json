@@ -1,6 +1,6 @@
 {
   "name": "caseify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Browserify transform to ensure all dependencies exist in a case-sensitive environment",
   "main": "index.js",
   "scripts": {
