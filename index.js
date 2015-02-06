@@ -1,7 +1,7 @@
 'use strict';
 
 var through = require('through');
-var detector = require('detect-invalid-requires');
+var valiquire = require('valiquire');
 var path = require('path');
 var mothership = require('mothership');
 
@@ -21,13 +21,17 @@ module.exports = function (file) {
 	var options = loadOptionsFromPackage(file);
 	return through(function (data) {
 		this.pause();
-		detector(file, {}, function (invalids) {
+		valiquire(file, function (errors) {
 			var msg, fileRelOrAbs;
-			if (invalids.length) {
-				msg = invalids.map(function (invalid) {
-					fileRelOrAbs = options.relativePaths ? path.relative(process.cwd(), invalid.file) : invalid.file;
-					return 'Caseify - ' + fileRelOrAbs.yellow + ' module ' + invalid.path.red + ' not found in case-sensitive environment';
-				}).join('\n');
+			console.log(errors);
+			if (errors && errors.length) {
+
+				// msg = invalids.map(function (invalid) {
+				// 	fileRelOrAbs = options.relativePaths ? path.relative(process.cwd(), invalid.file) : invalid.file;
+				// 	return 'Caseify - ' + fileRelOrAbs.yellow + ' module ' + invalid.path.red + ' not found in case-sensitive environment';
+				// }).join('\n');
+
+				msg = errors.join('\n');
 
 				if (options.throwOnError) {
 					throw new Error(msg);

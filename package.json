@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/justinjmoses/casify",
   "dependencies": {
-    "colors": "1.0.x",
-    "detect-invalid-requires": "0.1.x",
-    "mothership": "0.3.x",
-    "through": "2.3.x"
+    "colors": "~1.0",
+    "mothership": "~0.3",
+    "through": "~2.3",
+    "valiquire": "~0.3"
   },
   "devDependencies": {
     "chai": "^1.10.0",
