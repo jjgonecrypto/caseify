@@ -22,7 +22,7 @@
     "url": "https://github.com/justinjmoses/casify/issues"
   },
   "peerDependencies": {
-    "browserify": ">= 2.3.0 < 9"
+    "browserify": ">= 2.3.0 < 11"
   },
   "homepage": "https://github.com/justinjmoses/casify",
   "dependencies": {
