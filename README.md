@@ -26,7 +26,7 @@ To configure how caseify works, add setting in your project's `package.json` fil
 
 * `relativePaths`: Default `false` - show file paths as relative to the current working directory
 
-* `throwOnError`: Default `fasle` - throw a fatal error if an invalid module is found. This is instead of the default behaviour which emits an error on the browserify stream. Note: this will occur before browserify has processed the file and interrupt it immediately.
+* `throwOnError`: Default `false` - throw a fatal error if an invalid module is found. This is instead of the default behaviour which emits an error on the browserify stream. Note: this will occur before browserify has processed the file and interrupt it immediately.
 
 
 eg. `package.json`
